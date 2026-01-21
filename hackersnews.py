@@ -1,18 +1,17 @@
 import time
 import requests
 
-toppage_url = "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty"
-each_url = "https://hacker-news.firebaseio.com/v0/item/{}.json?print=pretty"
-
 
 def get_toppage_ids():
+    toppage_url = "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty"
     response = requests.get(toppage_url)
     ids = response.json()  # .jsonの処理は文字列をリストへ変換するのに必要
     return ids[:30]
 
 
 def get_item(item_id):
-    response = requests.get(each_url.replace("{}", str(item_id)))
+    each_url = f"https://hacker-news.firebaseio.com/v0/item/{item_id}.json?print=pretty"
+    response = requests.get(each_url)
     return response.json()
 
 
